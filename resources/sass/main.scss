@@ -1,0 +1,53 @@
+#blog {
+  margin: 2rem auto 2rem auto;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: bolder;
+  }
+
+  h2 {
+    font-size: 2.1rem;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+  }
+
+  .title {
+    margin: 0 0 4rem 0;
+  }
+
+  .divider {
+    overflow: hidden;
+  }
+
+  .blog-main {
+    width: 68%;
+    margin: 0 1%;
+    float: left;
+  }
+
+  aside {
+    width: 28%;
+    height: 98%;
+    margin: 0 1%;
+    float: right;
+  }
+}
+
+.noresize {
+  resize: none;
+}
+
+#comment-section {
+  margin-top: 6rem;
+  /*border: 1px;
+  border-style: dashed none none none;*/
+}
+
+.comment {
+  padding: 1em 2em;
+  border: 1px slategrey;
+  border-style: solid none none none;
+}

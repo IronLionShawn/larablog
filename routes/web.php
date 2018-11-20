@@ -46,6 +46,8 @@ Route::get('/posts/{slug}', "Posts\PostsController@show");
 Route::post('/posts',"Posts\PostsController@store");
 Route::post('/posts/{slug}/edit',"Posts\PostsController@edit");
 Route::post('/posts/{id}/comments', "Comments\CommentsController@store");
+Route::get('/projects/create','Projects\ProjectsController@create');
+Route::post('/projects','Projects\ProjectsController@store');
 
 
 
@@ -54,9 +56,17 @@ Route::get('/test/', function() {
    return "1";
 });
 
+Route::get('/skills/',function() {
+    return ['HTML', 'CSS', "JavaScript", 'jQuery', 'Angular', 'React', 'PHP', 'C#'];
+});
+
 Route::post('/test/', function() {
 
 });
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/vue',function(){
+    return view('vue');
+});

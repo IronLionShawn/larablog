@@ -17,7 +17,22 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
+
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+
+Vue.component('message-element',require('./components/message-element'));
+
+Vue.component('ins-modal', require('./components/INS-Modal'));
+
+Vue.component('tab', require('./components/tab.vue'));
+
+Vue.component('tabs', require('./components/tabs.vue'));
+
+Vue.component('coupon', require('./components/coupon.vue'));
+
+Vue.component('modal-card', require('./components/modal-card.vue'));
+
+Vue.component('progress-view', require('./components/progress-view.vue'));
 
 // const files = require.context('./', true, /\.vue$/i)
 
@@ -31,6 +46,62 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
+/*const app = new Vue({
     el: '#app'
+});*/
+
+window.EventHandler = new Vue();
+
+new Vue({
+    el:'#root',
+    data: {
+        showModal: false,
+        couponApplied: false,
+        skills: [],
+        name: '',
+        description: '',
+
+    },
+    methods: {
+        onCouponApplied(couponInput) {
+
+            //console.log(couponInput);
+
+            console.warn('onCoupon applied');
+
+            this.couponApplied = true;
+
+            if (couponInput.length > 0) {
+                this.couponApplied = true;
+            }
+            else {
+                this.couponApplied = false;
+            }
+        },
+        logger(data) {
+            console.log(data);
+        },
+    },
+    created() {
+        EventHandler.$on('applied', (data) => { console.log(data);this.onCouponApplied(data);});
+    },
+    mounted() {
+
+        var self = this;
+        axios.get('/skills/').then((response) => {
+          self.skills = response.data;
+          self.$options.methods.logger(response);
+          console.log(self);
+
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
 });
+
+//Vue.component('test',require('./components/TestComponent'));
+
+
+
+

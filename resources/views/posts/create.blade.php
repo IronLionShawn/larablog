@@ -31,6 +31,18 @@
 
         @include('partials.form-errors')
 
+        <form action="/posts" method="post">
+            <div class="form-group"><label for="inputTitle"></label><textarea name="content" id="" cols="30" rows="10"
+                                                                               class="form-control noresize"
+                                                                               required></textarea></div>
+            <div class="form-group"><label for="content"></label><textarea name="content" id="" cols="30" rows="10"
+                                                                            class="form-control noresize"
+                                                                            required></textarea></div>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit" value="">Publish</button>
+            </div>
+        </form>
+
     </div>
 @endsection
 

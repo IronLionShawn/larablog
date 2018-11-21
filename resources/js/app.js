@@ -52,7 +52,7 @@ Vue.component('progress-view', require('./components/progress-view.vue'));
 
 window.EventHandler = new Vue();
 
-new Vue({
+/*new Vue({
     el:'#root',
     data: {
         showModal: false,
@@ -81,9 +81,12 @@ new Vue({
         logger(data) {
             console.log(data);
         },
+        onSubmit() {
+            alert('submitting');
+        },
     },
     created() {
-        EventHandler.$on('applied', (data) => { console.log(data);this.onCouponApplied(data);});
+        //EventHandler.$on('applied', (data) => { console.log(data);this.onCouponApplied(data);});
     },
     mounted() {
 
@@ -98,8 +101,68 @@ new Vue({
             console.log(error);
         });
     }
-});
+});*/
 
+class Errors {
+    constructor(){
+        this._errors = {};
+
+        this.getField = (field) => {
+            if (this._errors[field]) {
+                return this._errors[field][0];
+            }
+        };
+
+        this.any = () => {
+          return Object.keys(this._errors).length > 0;
+        };
+
+        this.record = (errors) => {
+            this._errors = errors;
+        };
+
+        this.clear = function(field) {
+          delete this._errors[field];
+        };
+    }
+}
+
+
+new Vue({
+    el: '#root',
+    data: {
+        name: '',
+        description: '',
+        hasErrors: false,
+        errorsObject: new Errors(),
+        errors: new Errors()
+    },
+    methods: {
+        onSubmit() {
+            let props = {'name': this.name, 'description': this.description };
+           axios.post('/projects',props)
+               .then( response => {
+                    alert(response.data);
+               })
+               .catch(error => {
+                    this.hasErrors = true;
+                    this.errors.record(error.response.data.errors);
+                    console.log(error.response);
+
+                    /*for (let error in this.errorsObject) {
+                        if(this.errorsObject.hasOwnProperty(error)){
+                           this.errors.push(this.errorsObject.getField(error));
+                        }
+                    }*/
+
+               })
+           ;
+        }
+    },
+    computed: {
+
+    }
+});
 //Vue.component('test',require('./components/TestComponent'));
 
 

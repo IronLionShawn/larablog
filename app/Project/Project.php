@@ -14,5 +14,5 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class Project extends Model
 {
-
+    protected $fillable = ['name', 'description'];
 }
